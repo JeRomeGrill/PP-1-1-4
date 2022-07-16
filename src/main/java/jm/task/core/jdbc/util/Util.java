@@ -18,10 +18,10 @@ public class Util {
         try {
             Class.forName(DRIVER);
             connection = DriverManager.getConnection(URL,USER_NAME,PASSWORD);
-            System.out.println("Database connection succesfull");
+            System.out.println("Connection successful");
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
-            System.out.println("Database connection failed");
+            System.out.println("Connection failed");
         }
         return connection;
     }
