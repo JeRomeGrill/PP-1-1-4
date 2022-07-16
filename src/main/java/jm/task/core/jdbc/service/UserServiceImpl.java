@@ -1,5 +1,6 @@
 package jm.task.core.jdbc.service;
 
+import com.mysql.cj.x.protobuf.MysqlxCrud;
 import jm.task.core.jdbc.model.User;
 
 import java.util.List;
