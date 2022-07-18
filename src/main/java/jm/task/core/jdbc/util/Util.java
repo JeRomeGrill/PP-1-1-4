@@ -12,7 +12,7 @@ public class Util {
     public static final String URL = "jdbc:mysql://localhost:3306/pp_schema";
     public static final String DRIVER = "com.mysql.cj.jdbc.Driver";
 
-    public Connection getConnection (){
+    public static Connection getConnection (){
         Connection connection = null;
         try {
             Class.forName(DRIVER);
