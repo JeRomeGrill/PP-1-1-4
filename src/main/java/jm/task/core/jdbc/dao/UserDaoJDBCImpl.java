@@ -26,6 +26,7 @@ public class UserDaoJDBCImpl implements UserDao {
                 )""";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.executeUpdate();
+            connection.commit();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -36,6 +37,7 @@ public class UserDaoJDBCImpl implements UserDao {
         String sql = "DROP TABLE IF EXISTS `User`";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.executeUpdate();
+            connection.commit();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -48,7 +50,8 @@ public class UserDaoJDBCImpl implements UserDao {
             preparedStatement.setString(2, lastName);
             preparedStatement.setByte(3, age);
             preparedStatement.executeUpdate();
-            System.out.println("User с именем "+name+ " добавлен в базу данных");
+            connection.commit();
+            System.out.println("User с именем " + name + " добавлен в базу данных");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -59,6 +62,7 @@ public class UserDaoJDBCImpl implements UserDao {
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setLong(1, id);
             preparedStatement.executeUpdate();
+            connection.commit();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -76,6 +80,7 @@ public class UserDaoJDBCImpl implements UserDao {
                 user.setLastName(resultSet.getString("lastName"));
                 user.setAge(resultSet.getByte("age"));
                 userList.add(user);
+                connection.commit();
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -87,6 +92,7 @@ public class UserDaoJDBCImpl implements UserDao {
         String sql = "DELETE FROM User";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.executeUpdate();
+            connection.commit();
         } catch (SQLException e) {
             e.printStackTrace();
         }

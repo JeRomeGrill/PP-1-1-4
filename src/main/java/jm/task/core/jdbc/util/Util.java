@@ -12,19 +12,18 @@ public class Util {
     public static final String URL = "jdbc:mysql://localhost:3306/pp_schema";
     public static final String DRIVER = "com.mysql.cj.jdbc.Driver";
 
-    public static Connection getConnection (){
+    public static Connection getConnection() {
         Connection connection = null;
         try {
             Class.forName(DRIVER);
-            connection = DriverManager.getConnection(URL,USER_NAME,PASSWORD);
+            connection = DriverManager.getConnection(URL, USER_NAME, PASSWORD);
+            connection.setAutoCommit(false);
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
             System.out.println("Connection failed");
         }
         return connection;
     }
-
-
 
 
 }

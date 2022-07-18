@@ -9,6 +9,7 @@ import java.util.List;
 
 public class UserServiceImpl implements UserService {
     private final UserDao userDao = new UserDaoJDBCImpl();
+
     public void createUsersTable() {
         userDao.createUsersTable();
     }
@@ -18,7 +19,7 @@ public class UserServiceImpl implements UserService {
     }
 
     public void saveUser(String name, String lastName, byte age) {
-        userDao.saveUser(name,lastName,age);
+        userDao.saveUser(name, lastName, age);
     }
 
     public void removeUserById(long id) {
