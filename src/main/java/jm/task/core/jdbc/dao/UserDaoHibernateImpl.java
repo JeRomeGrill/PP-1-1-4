@@ -9,6 +9,7 @@ import org.hibernate.query.Query;
 import javax.persistence.EntityManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserDaoHibernateImpl implements UserDao {
@@ -91,11 +92,30 @@ public class UserDaoHibernateImpl implements UserDao {
 
     @Override
     public List<User> getAllUsers() {
-        return null;
+        List<User> list = new ArrayList<>();
+        try (Session session = Util.getSessionFactory().openSession()) {
+            list = session.createQuery("from User", User.class).list();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 
     @Override
     public void cleanUsersTable() {
-
+        List<User> list = getAllUsers();
+        try (Session session = Util.getSessionFactory().openSession()) {
+            for (User user:list) {
+                transaction = session.beginTransaction();
+                session.delete(user);
+                transaction.commit();
+            }
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
     }
 }
