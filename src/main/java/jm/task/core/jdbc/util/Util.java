@@ -50,18 +50,5 @@ public class Util {
         return sessionFactory;
     }
 
-    public static Connection getConnection() {
-        Connection connection = null;
-        try {
-            Class.forName(DRIVER);
-            connection = DriverManager.getConnection(URL, USER_NAME, PASSWORD);
-            connection.setAutoCommit(false);
-        } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
-            System.out.println("Connection failed");
-        }
-        return connection;
-    }
-
 
 }
